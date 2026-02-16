@@ -1,4 +1,6 @@
+using System.Xml;
 using Godot;
+using Microsoft.VisualBasic;
 
 [Tool]
 public partial class CreateRagdoll : Skeleton3D
@@ -9,12 +11,14 @@ public partial class CreateRagdoll : Skeleton3D
 	[Export] public Skeleton3D AnimationSkeleton;
 	[Export] public float CapsuleRadius = 0.1f;
 
+	private Node3D root;
+
 	private void Generate()
 	{
 		Clear();
-		// CreateBones();
-		// CreateJoints();
-		GenerateSkeleton();
+		GenerateRoot();
+		CreateBones(root);
+		CreateJoints(root);
 	}
 
 	private void Clear()
@@ -26,7 +30,15 @@ public partial class CreateRagdoll : Skeleton3D
 		}
 	}
 
-	private void CreateBones()
+	private void GenerateRoot()
+	{
+		root = new Node3D();
+		root.Name = "Ragdoll";
+		AddChild(root);
+		root.Owner = GetOwner<Node>();
+	}
+
+	private void CreateBones(Node3D root)
 	{
 		for (int i = 0; i < GetBoneCount(); i++)
 		{
@@ -37,10 +49,6 @@ public partial class CreateRagdoll : Skeleton3D
 			bone.Name = GetBoneName(i) + "_rag";
 			bone.BoneName = GetBoneName(i);
 			bone.Skeleton = this;
-
-			// bone.CanSleep = false;
-			// bone.FreezeMode = RigidBody3D.FreezeModeEnum.Kinematic;
-			// bone.ContinuousCd = true;
 
 			bone.GlobalTransform = GetBoneGlobalPose(i);
 
@@ -54,7 +62,7 @@ public partial class CreateRagdoll : Skeleton3D
 
 			col.Name = GetBoneName(i) + "_col";
 
-			AddChild(bone);
+			root.AddChild(bone);
 			bone.AddChild(col);
 
 			bone.Owner = GetOwner<Node>();
@@ -62,39 +70,44 @@ public partial class CreateRagdoll : Skeleton3D
 		}
 	}
 
-	private RagdollBone FindBone(string name)
+	private RagdollBone FindBone(Node node, string name)
 	{
-		foreach (Node child in GetChildren())
+		foreach (Node child in node.GetChildren())
 		{
 			if (child is RagdollBone rb && rb.Name == name)
 				return rb;
+
+			var found = FindBone(child, name);
+			if (found != null)
+				return found;
 		}
 		return null;
 	}
 
-	private void CreateJoints()
+
+	private void CreateJoints(Node3D root)
 	{
 		for (int i = 0; i < GetBoneCount(); i++)
 		{
 			int parentIndex = GetBoneParent(i);
 			if (parentIndex < 0) continue;
 
-			var parentBody = FindBone(GetBoneName(parentIndex) + "_rag");
-			var childBody = FindBone(GetBoneName(i) + "_rag");
+			var parentBone = FindBone(root, GetBoneName(parentIndex) + "_rag");
+			var childBone = FindBone(root, GetBoneName(i) + "_rag");
 
-			if (parentBody == null || childBody == null) continue;
+			if (parentBone == null || childBone == null) continue;
 
 			var joint = new RagdollJoint();
-			joint.Name = $"{parentBody.Name}_to_{childBody.Name}_joint".Replace("_rag", "");
+			joint.Name = $"{parentBone.Name}_to_{childBone.Name}_joint".Replace("_rag", "");
 
-			parentBody.AddChild(joint);
+			parentBone.AddChild(joint);
 			joint.GlobalTransform = GetBoneGlobalPose(i);
 
-			joint.NodeA = joint.GetPathTo(parentBody);
-			joint.NodeB = joint.GetPathTo(childBody);
+			joint.NodeA = joint.GetPathTo(parentBone);
+			joint.NodeB = joint.GetPathTo(childBone);
 
-			joint.BoneA = parentBody;
-			joint.BoneB = childBody;
+			joint.BoneA = parentBone;
+			joint.BoneB = childBone;
 
 			joint.PhysicsSkeleton = this;
 			joint.AnimationSkeleton = AnimationSkeleton;
@@ -102,25 +115,4 @@ public partial class CreateRagdoll : Skeleton3D
 			joint.Owner = GetOwner<Node>();
 		}
 	}
-
-	private void GenerateSkeleton()
-	{
-		var parent = GetParent();
-		if (parent == null) return;
-
-		var animSkeleton = new Skeleton3D();
-		animSkeleton.Name = Name + "_anim";
-
-		parent.AddChild(animSkeleton);
-		animSkeleton.Owner = GetOwner<Node>();
-		animSkeleton.GlobalTransform = GlobalTransform;
-
-		for (int i = 0; i < GetBoneCount(); i++)
-		{
-			animSkeleton.AddBone(GetBoneName(i));
-			animSkeleton.SetBoneParent(i, GetBoneParent(i));
-			animSkeleton.SetBoneRest(i, GetBoneRest(i));
-		}
-	}
-
 }

@@ -7,18 +7,27 @@ public partial class RagdollBone : RigidBody3D
 
     public int BoneIndex = 0;
 
+    public override void _Ready()
+    {
+        if (Skeleton != null)
+        {
+            BoneIndex = Skeleton.FindBone(BoneName);
+        }
+
+    }
+
     public override void _PhysicsProcess(double delta)
 
     {
         if (Engine.IsEditorHint())
         {
-            Freeze = true;
-            Sleeping = true;
             return;
         }
 
         if (Skeleton != null)
-            BoneIndex = Skeleton.FindBone(BoneName);
+
+            Freeze = false;
+        Sleeping = false;
 
         Transform3D boneGlobalTransform = Skeleton.GetBoneGlobalPose(BoneIndex);
 

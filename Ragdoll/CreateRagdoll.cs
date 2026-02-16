@@ -7,20 +7,21 @@ public partial class CreateRagdoll : Skeleton3D
 	public Callable GenerateButton => Callable.From(Generate);
 
 	[Export] public Skeleton3D AnimationSkeleton;
-	[Export] public float CapsuleRadius = 0.05f;
+	[Export] public float CapsuleRadius = 0.1f;
 
 	private void Generate()
 	{
 		Clear();
-		CreateBones();
-		CreateJoints();
+		// CreateBones();
+		// CreateJoints();
+		GenerateSkeleton();
 	}
 
 	private void Clear()
 	{
 		foreach (Node child in GetChildren())
 		{
-			if (child.Name.ToString().Contains("_rag") || child.Name.ToString().Contains("_col") || child.Name.ToString().Contains("_joint"))
+			if (child.Name.ToString().Contains("_rag") || child.Name.ToString().Contains("_col") || child.Name.ToString().Contains("_joint") || child.Name.ToString().Contains("_anim"))
 				child.Free();
 		}
 	}
@@ -37,14 +38,14 @@ public partial class CreateRagdoll : Skeleton3D
 			bone.BoneName = GetBoneName(i);
 			bone.Skeleton = this;
 
-			bone.CanSleep = false;
-			bone.FreezeMode = RigidBody3D.FreezeModeEnum.Kinematic;
-			bone.ContinuousCd = true;
-
+			// bone.CanSleep = false;
+			// bone.FreezeMode = RigidBody3D.FreezeModeEnum.Kinematic;
+			// bone.ContinuousCd = true;
 
 			bone.GlobalTransform = GetBoneGlobalPose(i);
 
 			var col = new CollisionShape3D();
+
 			col.Shape = new CapsuleShape3D
 			{
 				Radius = CapsuleRadius,
@@ -61,7 +62,7 @@ public partial class CreateRagdoll : Skeleton3D
 		}
 	}
 
-	private RagdollBone FindBody(string name)
+	private RagdollBone FindBone(string name)
 	{
 		foreach (Node child in GetChildren())
 		{
@@ -71,7 +72,6 @@ public partial class CreateRagdoll : Skeleton3D
 		return null;
 	}
 
-
 	private void CreateJoints()
 	{
 		for (int i = 0; i < GetBoneCount(); i++)
@@ -79,8 +79,8 @@ public partial class CreateRagdoll : Skeleton3D
 			int parentIndex = GetBoneParent(i);
 			if (parentIndex < 0) continue;
 
-			var parentBody = FindBody(GetBoneName(parentIndex) + "_rag");
-			var childBody = FindBody(GetBoneName(i) + "_rag");
+			var parentBody = FindBone(GetBoneName(parentIndex) + "_rag");
+			var childBody = FindBone(GetBoneName(i) + "_rag");
 
 			if (parentBody == null || childBody == null) continue;
 
@@ -100,6 +100,26 @@ public partial class CreateRagdoll : Skeleton3D
 			joint.AnimationSkeleton = AnimationSkeleton;
 
 			joint.Owner = GetOwner<Node>();
+		}
+	}
+
+	private void GenerateSkeleton()
+	{
+		var parent = GetParent();
+		if (parent == null) return;
+
+		var animSkeleton = new Skeleton3D();
+		animSkeleton.Name = Name + "_anim";
+
+		parent.AddChild(animSkeleton);
+		animSkeleton.Owner = GetOwner<Node>();
+		animSkeleton.GlobalTransform = GlobalTransform;
+
+		for (int i = 0; i < GetBoneCount(); i++)
+		{
+			animSkeleton.AddBone(GetBoneName(i));
+			animSkeleton.SetBoneParent(i, GetBoneParent(i));
+			animSkeleton.SetBoneRest(i, GetBoneRest(i));
 		}
 	}
 

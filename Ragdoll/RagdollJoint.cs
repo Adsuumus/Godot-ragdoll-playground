@@ -8,8 +8,8 @@ public partial class RagdollJoint : Generic6DofJoint3D
 	[Export] public RagdollBone BoneA;
 	[Export] public RagdollBone BoneB;
 
-	[Export] public float Stiffness = 10f;
-	[Export] public float Damping = 1f;
+	[Export] public float Stiffness = 1f;
+	[Export] public float Damping = 0.5f;
 
 	public override void _Ready()
 	{
@@ -19,9 +19,9 @@ public partial class RagdollJoint : Generic6DofJoint3D
 			return;
 		}
 
-		SetFlagX(Flag.EnableMotor, true);
-		SetFlagY(Flag.EnableMotor, true);
-		SetFlagZ(Flag.EnableMotor, true);
+		SetFlagX(Flag.EnableMotor, false);
+		SetFlagY(Flag.EnableMotor, false);
+		SetFlagZ(Flag.EnableMotor, false);
 
 		SetParamX(Param.AngularMotorForceLimit, 999999);
 		SetParamY(Param.AngularMotorForceLimit, 999999);

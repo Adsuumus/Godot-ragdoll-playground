@@ -201,7 +201,7 @@ shape = SubResource("ConcavePolygonShape3D_m0wsq")
 [node name="Box" type="StaticBody3D" parent="Envoriement/Plane" unique_id=952869524]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Envoriement/Plane/Box" unique_id=1593649668]
-transform = Transform3D(3.144952, 0, 0, 0, 1.4317899, 0, 0, 0, 1.7946559, 1.6056505, -0.2839415, 1.4896849)
+transform = Transform3D(3.144952, 0, 0, 0, 1.4317899, 0, 0, 0, 1.7946559, 1.6056505, -0.2839415, 1.6089069)
 mesh = SubResource("BoxMesh_8hoec")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Envoriement/Plane/Box" unique_id=1907276624]
@@ -224,7 +224,7 @@ metadata/extras = {
 "set": true
 }
 
-[node name="GeneralSkeleton" type="Skeleton3D" parent="baseRig/rig" unique_id=445816097 node_paths=PackedStringArray("AnimationSkeleton")]
+[node name="GeneralSkeleton" type="Skeleton3D" parent="baseRig/rig" unique_id=445816097]
 unique_name_in_owner = true
 motion_scale = 0.6853958
 bones/0/name = "Hips"
@@ -504,7 +504,6 @@ bones/22/bone_meta/extras = {
 "softlink": false
 }
 script = ExtResource("1_8hoec")
-AnimationSkeleton = NodePath(".")
 metadata/extras = {
 "const_interp": false,
 "exclude": false,
@@ -520,336 +519,741 @@ metadata/extras = {
 "hops": {}
 }
 
-[node name="Ragdoll" type="Node3D" parent="baseRig/rig/GeneralSkeleton" unique_id=475871712]
+[node name="Ragdoll" type="Node3D" parent="baseRig/rig/GeneralSkeleton" unique_id=1299217798]
 
-[node name="Hips_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=218205739 node_paths=PackedStringArray("Skeleton")]
+[node name="Hips_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=154628761 node_paths=PackedStringArray("PhysicsSkeleton")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6853958, 0.0030260459)
+mass = 15.0
 script = ExtResource("2_8hoec")
 BoneName = "Hips"
-Skeleton = NodePath("../..")
+PhysicsSkeleton = NodePath("../..")
 
-[node name="Hips_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Hips_rag" unique_id=1852292066]
+[node name="Hips_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Hips_rag" unique_id=1433796235]
 shape = SubResource("CapsuleShape3D_8hoec")
 
-[node name="Hips_to_LeftUpperLeg_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Hips_rag" unique_id=366846551 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
+[node name="Hips_to_LeftUpperLeg_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Hips_rag" unique_id=2090354456 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
 transform = Transform3D(-1, 0, 0, 0, -1, 0, 0, 0, 1, 0.08963954, 0, -1.3969839e-09)
 node_a = NodePath("..")
 node_b = NodePath("../../LeftUpperLeg_rag")
+angular_limit_x/upper_angle = 0.5235988
+angular_limit_x/lower_angle = -0.5235988
+angular_limit_y/upper_angle = 0.5235988
+angular_limit_y/lower_angle = -0.5235988
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
 script = ExtResource("3_kldcw")
 PhysicsSkeleton = NodePath("../../..")
-AnimationSkeleton = NodePath("../../..")
+AnimationSkeleton = NodePath("../../../../GeneralSkeleton_anim")
 BoneA = NodePath("..")
 BoneB = NodePath("../../LeftUpperLeg_rag")
 
-[node name="Hips_to_RightUpperLeg_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Hips_rag" unique_id=599479962 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
+[node name="Hips_to_RightUpperLeg_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Hips_rag" unique_id=1392721949 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
 transform = Transform3D(-1, 0, 0, 0, -1, 0, 0, 0, 1, -0.08963954, 0, -3.259629e-09)
 node_a = NodePath("..")
 node_b = NodePath("../../RightUpperLeg_rag")
+angular_limit_x/upper_angle = 0.5235988
+angular_limit_x/lower_angle = -0.5235988
+angular_limit_y/upper_angle = 0.5235988
+angular_limit_y/lower_angle = -0.5235988
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
 script = ExtResource("3_kldcw")
 PhysicsSkeleton = NodePath("../../..")
-AnimationSkeleton = NodePath("../../..")
+AnimationSkeleton = NodePath("../../../../GeneralSkeleton_anim")
 BoneA = NodePath("..")
 BoneB = NodePath("../../RightUpperLeg_rag")
 
-[node name="Hips_to_Spine_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Hips_rag" unique_id=888096834 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
+[node name="Hips_to_Spine_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Hips_rag" unique_id=1868241959 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5971226e-14, 0.24186414, -0.017136768)
 node_a = NodePath("..")
 node_b = NodePath("../../Spine_rag")
+angular_limit_x/upper_angle = 0.5235988
+angular_limit_x/lower_angle = -0.5235988
+angular_limit_y/upper_angle = 0.5235988
+angular_limit_y/lower_angle = -0.5235988
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
 script = ExtResource("3_kldcw")
 PhysicsSkeleton = NodePath("../../..")
-AnimationSkeleton = NodePath("../../..")
+AnimationSkeleton = NodePath("../../../../GeneralSkeleton_anim")
 BoneA = NodePath("..")
 BoneB = NodePath("../../Spine_rag")
 
-[node name="LeftUpperLeg_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=560663540 node_paths=PackedStringArray("Skeleton")]
+[node name="LeftUpperLeg_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=1650228098 node_paths=PackedStringArray("PhysicsSkeleton")]
 transform = Transform3D(-1, 0, 0, 0, -1, 0, 0, 0, 1, 0.08963954, 0.6853958, 0.0030260445)
+mass = 6.0
 script = ExtResource("2_8hoec")
 BoneName = "LeftUpperLeg"
-Skeleton = NodePath("../..")
+PhysicsSkeleton = NodePath("../..")
 
-[node name="LeftUpperLeg_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftUpperLeg_rag" unique_id=1806491581]
+[node name="LeftUpperLeg_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftUpperLeg_rag" unique_id=1086650559]
 shape = SubResource("CapsuleShape3D_kldcw")
 
-[node name="LeftUpperLeg_to_LeftLowerLeg_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftUpperLeg_rag" unique_id=1678622961 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
+[node name="LeftUpperLeg_to_LeftLowerLeg_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftUpperLeg_rag" unique_id=1525704298 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -0.021760315, 0.29590946, 0.031041915)
 node_a = NodePath("..")
 node_b = NodePath("../../LeftLowerLeg_rag")
+angular_limit_x/upper_angle = 0.5235988
+angular_limit_x/lower_angle = -0.5235988
+angular_limit_y/upper_angle = 0.5235988
+angular_limit_y/lower_angle = -0.5235988
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
 script = ExtResource("3_kldcw")
 PhysicsSkeleton = NodePath("../../..")
-AnimationSkeleton = NodePath("../../..")
+AnimationSkeleton = NodePath("../../../../GeneralSkeleton_anim")
 BoneA = NodePath("..")
 BoneB = NodePath("../../LeftLowerLeg_rag")
 
-[node name="LeftLowerLeg_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=502444041 node_paths=PackedStringArray("Skeleton")]
+[node name="LeftLowerLeg_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=1183548552 node_paths=PackedStringArray("PhysicsSkeleton")]
 transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, -1, 0.11139985, 0.3894863, 0.03406796)
+mass = 6.0
 script = ExtResource("2_8hoec")
 BoneName = "LeftLowerLeg"
-Skeleton = NodePath("../..")
+PhysicsSkeleton = NodePath("../..")
 
-[node name="LeftLowerLeg_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftLowerLeg_rag" unique_id=1626401344]
+[node name="LeftLowerLeg_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftLowerLeg_rag" unique_id=1167586914]
 shape = SubResource("CapsuleShape3D_3kqfq")
 
-[node name="LeftLowerLeg_to_LeftFoot_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftLowerLeg_rag" unique_id=1674283657 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
+[node name="LeftLowerLeg_to_LeftFoot_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftLowerLeg_rag" unique_id=712659384 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
 transform = Transform3D(-1, 0, 0, 0, 0, -1, 0, -1, 0, 0.012124665, 0.2947673, 0.0950257)
 node_a = NodePath("..")
 node_b = NodePath("../../LeftFoot_rag")
+angular_limit_x/upper_angle = 0.5235988
+angular_limit_x/lower_angle = -0.5235988
+angular_limit_y/upper_angle = 0.5235988
+angular_limit_y/lower_angle = -0.5235988
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
 script = ExtResource("3_kldcw")
 PhysicsSkeleton = NodePath("../../..")
-AnimationSkeleton = NodePath("../../..")
+AnimationSkeleton = NodePath("../../../../GeneralSkeleton_anim")
 BoneA = NodePath("..")
 BoneB = NodePath("../../LeftFoot_rag")
 
-[node name="LeftFoot_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=809615654 node_paths=PackedStringArray("Skeleton")]
+[node name="LeftFoot_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=764051467 node_paths=PackedStringArray("PhysicsSkeleton")]
 transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, 0.12352452, 0.09471902, -0.060957745)
+mass = 6.0
 script = ExtResource("2_8hoec")
 BoneName = "LeftFoot"
-Skeleton = NodePath("../..")
+PhysicsSkeleton = NodePath("../..")
 
-[node name="LeftFoot_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftFoot_rag" unique_id=1827068348]
+[node name="LeftFoot_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftFoot_rag" unique_id=253614022]
 shape = SubResource("CapsuleShape3D_88e2r")
 
-[node name="RightUpperLeg_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=106909647 node_paths=PackedStringArray("Skeleton")]
+[node name="RightUpperLeg_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=1430743648 node_paths=PackedStringArray("PhysicsSkeleton")]
 transform = Transform3D(-1, 0, 0, 0, -1, 0, 0, 0, 1, -0.08963954, 0.6853958, 0.0030260426)
+mass = 6.0
 script = ExtResource("2_8hoec")
 BoneName = "RightUpperLeg"
-Skeleton = NodePath("../..")
+PhysicsSkeleton = NodePath("../..")
 
-[node name="RightUpperLeg_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightUpperLeg_rag" unique_id=567458081]
+[node name="RightUpperLeg_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightUpperLeg_rag" unique_id=1052877667]
 shape = SubResource("CapsuleShape3D_5lao0")
 
-[node name="RightUpperLeg_to_RightLowerLeg_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightUpperLeg_rag" unique_id=1297796286 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
+[node name="RightUpperLeg_to_RightLowerLeg_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightUpperLeg_rag" unique_id=691124654 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0.021760285, 0.2959094, 0.03104192)
 node_a = NodePath("..")
 node_b = NodePath("../../RightLowerLeg_rag")
+angular_limit_x/upper_angle = 0.5235988
+angular_limit_x/lower_angle = -0.5235988
+angular_limit_y/upper_angle = 0.5235988
+angular_limit_y/lower_angle = -0.5235988
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
 script = ExtResource("3_kldcw")
 PhysicsSkeleton = NodePath("../../..")
-AnimationSkeleton = NodePath("../../..")
+AnimationSkeleton = NodePath("../../../../GeneralSkeleton_anim")
 BoneA = NodePath("..")
 BoneB = NodePath("../../RightLowerLeg_rag")
 
-[node name="RightLowerLeg_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=130746123 node_paths=PackedStringArray("Skeleton")]
+[node name="RightLowerLeg_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=956226054 node_paths=PackedStringArray("PhysicsSkeleton")]
 transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, -1, -0.11139982, 0.38948637, 0.034067962)
+mass = 6.0
 script = ExtResource("2_8hoec")
 BoneName = "RightLowerLeg"
-Skeleton = NodePath("../..")
+PhysicsSkeleton = NodePath("../..")
 
-[node name="RightLowerLeg_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightLowerLeg_rag" unique_id=42852183]
+[node name="RightLowerLeg_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightLowerLeg_rag" unique_id=584397635]
 shape = SubResource("CapsuleShape3D_v7u1e")
 
-[node name="RightLowerLeg_to_RightFoot_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightLowerLeg_rag" unique_id=1613533069 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
+[node name="RightLowerLeg_to_RightFoot_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightLowerLeg_rag" unique_id=769478724 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
 transform = Transform3D(-1, 0, 0, 0, 0, -1, 0, -1, 0, -0.012124687, 0.2947673, 0.095025726)
 node_a = NodePath("..")
 node_b = NodePath("../../RightFoot_rag")
+angular_limit_x/upper_angle = 0.5235988
+angular_limit_x/lower_angle = -0.5235988
+angular_limit_y/upper_angle = 0.5235988
+angular_limit_y/lower_angle = -0.5235988
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
 script = ExtResource("3_kldcw")
 PhysicsSkeleton = NodePath("../../..")
-AnimationSkeleton = NodePath("../../..")
+AnimationSkeleton = NodePath("../../../../GeneralSkeleton_anim")
 BoneA = NodePath("..")
 BoneB = NodePath("../../RightFoot_rag")
 
-[node name="RightFoot_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=1207831154 node_paths=PackedStringArray("Skeleton")]
+[node name="RightFoot_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=1324785460 node_paths=PackedStringArray("PhysicsSkeleton")]
 transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, -0.12352451, 0.09471908, -0.060957763)
+mass = 6.0
 script = ExtResource("2_8hoec")
 BoneName = "RightFoot"
-Skeleton = NodePath("../..")
+PhysicsSkeleton = NodePath("../..")
 
-[node name="RightFoot_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightFoot_rag" unique_id=1679221998]
+[node name="RightFoot_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightFoot_rag" unique_id=339617036]
 shape = SubResource("CapsuleShape3D_hc0ee")
 
-[node name="Spine_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=872755433 node_paths=PackedStringArray("Skeleton")]
+[node name="Spine_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=848628773 node_paths=PackedStringArray("PhysicsSkeleton")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5971226e-14, 0.9272599, -0.014110722)
+mass = 15.0
 script = ExtResource("2_8hoec")
 BoneName = "Spine"
-Skeleton = NodePath("../..")
+PhysicsSkeleton = NodePath("../..")
 
-[node name="Spine_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Spine_rag" unique_id=624544385]
+[node name="Spine_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Spine_rag" unique_id=730538645]
 shape = SubResource("CapsuleShape3D_h5022")
 
-[node name="Spine_to_Neck_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Spine_rag" unique_id=1503862534 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
+[node name="Spine_to_Neck_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Spine_rag" unique_id=1918430795 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.4798095e-14, 0.24480009, -0.04347497)
 node_a = NodePath("..")
 node_b = NodePath("../../Neck_rag")
+angular_limit_x/upper_angle = 0.5235988
+angular_limit_x/lower_angle = -0.5235988
+angular_limit_y/upper_angle = 0.5235988
+angular_limit_y/lower_angle = -0.5235988
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
 script = ExtResource("3_kldcw")
 PhysicsSkeleton = NodePath("../../..")
-AnimationSkeleton = NodePath("../../..")
+AnimationSkeleton = NodePath("../../../../GeneralSkeleton_anim")
 BoneA = NodePath("..")
 BoneB = NodePath("../../Neck_rag")
 
-[node name="Spine_to_RightShoulder_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Spine_rag" unique_id=315012176 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
+[node name="Spine_to_RightShoulder_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Spine_rag" unique_id=25853093 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
 transform = Transform3D(0, -1, 0, 0, 0, 1, -1, 0, 0, -0.038310908, 0.18536031, -0.037099432)
 node_a = NodePath("..")
 node_b = NodePath("../../RightShoulder_rag")
+angular_limit_x/upper_angle = 0.5235988
+angular_limit_x/lower_angle = -0.5235988
+angular_limit_y/upper_angle = 0.5235988
+angular_limit_y/lower_angle = -0.5235988
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
 script = ExtResource("3_kldcw")
 PhysicsSkeleton = NodePath("../../..")
-AnimationSkeleton = NodePath("../../..")
+AnimationSkeleton = NodePath("../../../../GeneralSkeleton_anim")
 BoneA = NodePath("..")
 BoneB = NodePath("../../RightShoulder_rag")
 
-[node name="Spine_to_LeftShoulder_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Spine_rag" unique_id=1508585766 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
+[node name="Spine_to_LeftShoulder_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Spine_rag" unique_id=1573881471 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
 transform = Transform3D(0, 1, 0, 0, 0, 1, 1, 0, 0, 0.038310908, 0.18536031, -0.037099432)
 node_a = NodePath("..")
 node_b = NodePath("../../LeftShoulder_rag")
+angular_limit_x/upper_angle = 0.5235988
+angular_limit_x/lower_angle = -0.5235988
+angular_limit_y/upper_angle = 0.5235988
+angular_limit_y/lower_angle = -0.5235988
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
 script = ExtResource("3_kldcw")
 PhysicsSkeleton = NodePath("../../..")
-AnimationSkeleton = NodePath("../../..")
+AnimationSkeleton = NodePath("../../../../GeneralSkeleton_anim")
 BoneA = NodePath("..")
 BoneB = NodePath("../../LeftShoulder_rag")
 
-[node name="Neck_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=1660594825 node_paths=PackedStringArray("Skeleton")]
+[node name="Neck_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=2083058347 node_paths=PackedStringArray("PhysicsSkeleton")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2076932e-13, 1.17206, -0.05758569)
+mass = 3.0
 script = ExtResource("2_8hoec")
 BoneName = "Neck"
-Skeleton = NodePath("../..")
+PhysicsSkeleton = NodePath("../..")
 
-[node name="Neck_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Neck_rag" unique_id=164190429]
+[node name="Neck_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Neck_rag" unique_id=1203854809]
 shape = SubResource("CapsuleShape3D_pie4s")
 
-[node name="Neck_to_Head_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Neck_rag" unique_id=490558011 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
+[node name="Neck_to_Head_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Neck_rag" unique_id=650325087 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.711136e-14, 0.080243826, 0.03129164)
 node_a = NodePath("..")
 node_b = NodePath("../../Head_rag")
+angular_limit_x/upper_angle = 0.7853982
+angular_limit_x/lower_angle = -0.7853982
+angular_limit_y/upper_angle = 0.7853982
+angular_limit_y/lower_angle = -0.7853982
+angular_limit_z/upper_angle = 0.43633232
+angular_limit_z/lower_angle = -0.43633232
 script = ExtResource("3_kldcw")
 PhysicsSkeleton = NodePath("../../..")
-AnimationSkeleton = NodePath("../../..")
+AnimationSkeleton = NodePath("../../../../GeneralSkeleton_anim")
 BoneA = NodePath("..")
 BoneB = NodePath("../../Head_rag")
 
-[node name="Head_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=1731867807 node_paths=PackedStringArray("Skeleton")]
+[node name="Head_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=1648397450 node_paths=PackedStringArray("PhysicsSkeleton")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5788068e-13, 1.2523038, -0.026294049)
+mass = 5.0
 script = ExtResource("2_8hoec")
 BoneName = "Head"
-Skeleton = NodePath("../..")
+PhysicsSkeleton = NodePath("../..")
 
-[node name="Head_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Head_rag" unique_id=910145748]
+[node name="Head_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/Head_rag" unique_id=162256548]
 shape = SubResource("CapsuleShape3D_20mpi")
 
-[node name="RightShoulder_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=47666806 node_paths=PackedStringArray("Skeleton")]
+[node name="RightShoulder_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=2068096223 node_paths=PackedStringArray("PhysicsSkeleton")]
 transform = Transform3D(0, -1, 0, 0, 0, 1, -1, 0, 0, -0.038310908, 1.1126202, -0.051210154)
+mass = 15.0
 script = ExtResource("2_8hoec")
 BoneName = "RightShoulder"
-Skeleton = NodePath("../..")
+PhysicsSkeleton = NodePath("../..")
 
-[node name="RightShoulder_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightShoulder_rag" unique_id=520295462]
+[node name="RightShoulder_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightShoulder_rag" unique_id=912972151]
 shape = SubResource("CapsuleShape3D_6va4y")
 
-[node name="RightShoulder_to_RightUpperArm_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightShoulder_rag" unique_id=843672512 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
+[node name="RightShoulder_to_RightUpperArm_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightShoulder_rag" unique_id=1336257246 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -3.7252903e-09, 0.11493269, 0)
 node_a = NodePath("..")
 node_b = NodePath("../../RightUpperArm_rag")
+angular_limit_x/upper_angle = 0.5235988
+angular_limit_x/lower_angle = -0.5235988
+angular_limit_y/upper_angle = 0.5235988
+angular_limit_y/lower_angle = -0.5235988
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
 script = ExtResource("3_kldcw")
 PhysicsSkeleton = NodePath("../../..")
-AnimationSkeleton = NodePath("../../..")
+AnimationSkeleton = NodePath("../../../../GeneralSkeleton_anim")
 BoneA = NodePath("..")
 BoneB = NodePath("../../RightUpperArm_rag")
 
-[node name="RightUpperArm_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=1307481049 node_paths=PackedStringArray("Skeleton")]
+[node name="RightUpperArm_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=1096749000 node_paths=PackedStringArray("PhysicsSkeleton")]
 transform = Transform3D(0, -1, 0, 0, 0, -1, 1, 0, 0, -0.1532436, 1.1126202, -0.05121015)
+mass = 2.0
 script = ExtResource("2_8hoec")
 BoneName = "RightUpperArm"
-Skeleton = NodePath("../..")
+PhysicsSkeleton = NodePath("../..")
 
-[node name="RightUpperArm_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightUpperArm_rag" unique_id=1807863575]
+[node name="RightUpperArm_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightUpperArm_rag" unique_id=400250962]
 shape = SubResource("CapsuleShape3D_57gwh")
 
-[node name="RightUpperArm_to_RightLowerArm_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightUpperArm_rag" unique_id=1622443909 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
+[node name="RightUpperArm_to_RightLowerArm_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightUpperArm_rag" unique_id=970838115 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -0.00860754, 0.22104234, 0.0055724382)
 node_a = NodePath("..")
 node_b = NodePath("../../RightLowerArm_rag")
+angular_limit_x/upper_angle = 0.5235988
+angular_limit_x/lower_angle = -0.5235988
+angular_limit_y/upper_angle = 0.5235988
+angular_limit_y/lower_angle = -0.5235988
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
 script = ExtResource("3_kldcw")
 PhysicsSkeleton = NodePath("../../..")
-AnimationSkeleton = NodePath("../../..")
+AnimationSkeleton = NodePath("../../../../GeneralSkeleton_anim")
 BoneA = NodePath("..")
 BoneB = NodePath("../../RightLowerArm_rag")
 
-[node name="RightLowerArm_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=106374536 node_paths=PackedStringArray("Skeleton")]
+[node name="RightLowerArm_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=1863008271 node_paths=PackedStringArray("PhysicsSkeleton")]
 transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, -0.37428594, 1.1070478, -0.05981769)
+mass = 2.0
 script = ExtResource("2_8hoec")
 BoneName = "RightLowerArm"
-Skeleton = NodePath("../..")
+PhysicsSkeleton = NodePath("../..")
 
-[node name="RightLowerArm_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightLowerArm_rag" unique_id=669978243]
+[node name="RightLowerArm_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightLowerArm_rag" unique_id=1547735577]
 shape = SubResource("CapsuleShape3D_fdfpi")
 
-[node name="RightLowerArm_to_RightHand_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightLowerArm_rag" unique_id=1874400249 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
+[node name="RightLowerArm_to_RightHand_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightLowerArm_rag" unique_id=1010250527 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -0.0055724382, 0.22104234, 0.027517479)
 node_a = NodePath("..")
 node_b = NodePath("../../RightHand_rag")
+angular_limit_x/upper_angle = 0.5235988
+angular_limit_x/lower_angle = -0.5235988
+angular_limit_y/upper_angle = 0.5235988
+angular_limit_y/lower_angle = -0.5235988
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
 script = ExtResource("3_kldcw")
 PhysicsSkeleton = NodePath("../../..")
-AnimationSkeleton = NodePath("../../..")
+AnimationSkeleton = NodePath("../../../../GeneralSkeleton_anim")
 BoneA = NodePath("..")
 BoneB = NodePath("../../RightHand_rag")
 
-[node name="RightHand_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=270307304 node_paths=PackedStringArray("Skeleton")]
+[node name="RightHand_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=639968644 node_paths=PackedStringArray("PhysicsSkeleton")]
 transform = Transform3D(0, -1, 0, 0, 0, -1, 1, 0, 0, -0.5953283, 1.1014754, -0.03230021)
+mass = 2.0
 script = ExtResource("2_8hoec")
 BoneName = "RightHand"
-Skeleton = NodePath("../..")
+PhysicsSkeleton = NodePath("../..")
 
-[node name="RightHand_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightHand_rag" unique_id=546467489]
+[node name="RightHand_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/RightHand_rag" unique_id=1533737087]
 shape = SubResource("CapsuleShape3D_negam")
 
-[node name="LeftShoulder_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=845026798 node_paths=PackedStringArray("Skeleton")]
+[node name="LeftShoulder_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=1221164431 node_paths=PackedStringArray("PhysicsSkeleton")]
 transform = Transform3D(0, 1, 0, 0, 0, 1, 1, 0, 0, 0.038310908, 1.1126202, -0.051210154)
+mass = 15.0
 script = ExtResource("2_8hoec")
 BoneName = "LeftShoulder"
-Skeleton = NodePath("../..")
+PhysicsSkeleton = NodePath("../..")
 
-[node name="LeftShoulder_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftShoulder_rag" unique_id=1255695362]
+[node name="LeftShoulder_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftShoulder_rag" unique_id=1724803047]
 shape = SubResource("CapsuleShape3D_w2cmw")
 
-[node name="LeftShoulder_to_LeftUpperArm_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftShoulder_rag" unique_id=1847426720 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
+[node name="LeftShoulder_to_LeftUpperArm_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftShoulder_rag" unique_id=902346333 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -3.7252903e-09, 0.11493269, 0)
 node_a = NodePath("..")
 node_b = NodePath("../../LeftUpperArm_rag")
+angular_limit_x/upper_angle = 0.5235988
+angular_limit_x/lower_angle = -0.5235988
+angular_limit_y/upper_angle = 0.5235988
+angular_limit_y/lower_angle = -0.5235988
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
 script = ExtResource("3_kldcw")
 PhysicsSkeleton = NodePath("../../..")
-AnimationSkeleton = NodePath("../../..")
+AnimationSkeleton = NodePath("../../../../GeneralSkeleton_anim")
 BoneA = NodePath("..")
 BoneB = NodePath("../../LeftUpperArm_rag")
 
-[node name="LeftUpperArm_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=666732322 node_paths=PackedStringArray("Skeleton")]
+[node name="LeftUpperArm_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=1533056746 node_paths=PackedStringArray("PhysicsSkeleton")]
 transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, 0.1532436, 1.1126202, -0.051210158)
+mass = 2.0
 script = ExtResource("2_8hoec")
 BoneName = "LeftUpperArm"
-Skeleton = NodePath("../..")
+PhysicsSkeleton = NodePath("../..")
 
-[node name="LeftUpperArm_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftUpperArm_rag" unique_id=781272943]
+[node name="LeftUpperArm_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftUpperArm_rag" unique_id=871943753]
 shape = SubResource("CapsuleShape3D_h2tag")
 
-[node name="LeftUpperArm_to_LeftLowerArm_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftUpperArm_rag" unique_id=2097765107 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
+[node name="LeftUpperArm_to_LeftLowerArm_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftUpperArm_rag" unique_id=210605574 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0.008607555, 0.22104234, 0.0055724382)
 node_a = NodePath("..")
 node_b = NodePath("../../LeftLowerArm_rag")
+angular_limit_x/upper_angle = 0.5235988
+angular_limit_x/lower_angle = -0.5235988
+angular_limit_y/upper_angle = 0.5235988
+angular_limit_y/lower_angle = -0.5235988
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
 script = ExtResource("3_kldcw")
 PhysicsSkeleton = NodePath("../../..")
-AnimationSkeleton = NodePath("../../..")
+AnimationSkeleton = NodePath("../../../../GeneralSkeleton_anim")
 BoneA = NodePath("..")
 BoneB = NodePath("../../LeftLowerArm_rag")
 
-[node name="LeftLowerArm_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=451952321 node_paths=PackedStringArray("Skeleton")]
+[node name="LeftLowerArm_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=753024397 node_paths=PackedStringArray("PhysicsSkeleton")]
 transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0.37428594, 1.1070478, -0.059817713)
+mass = 2.0
 script = ExtResource("2_8hoec")
 BoneName = "LeftLowerArm"
-Skeleton = NodePath("../..")
+PhysicsSkeleton = NodePath("../..")
 
-[node name="LeftLowerArm_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftLowerArm_rag" unique_id=888994859]
+[node name="LeftLowerArm_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftLowerArm_rag" unique_id=1029225029]
 shape = SubResource("CapsuleShape3D_kvbtn")
 
-[node name="LeftLowerArm_to_LeftHand_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftLowerArm_rag" unique_id=1702349082 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
+[node name="LeftLowerArm_to_LeftHand_joint" type="Generic6DOFJoint3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftLowerArm_rag" unique_id=1368114914 node_paths=PackedStringArray("PhysicsSkeleton", "AnimationSkeleton", "BoneA", "BoneB")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.0055725574, 0.22104228, 0.027517457)
 node_a = NodePath("..")
 node_b = NodePath("../../LeftHand_rag")
+angular_limit_x/upper_angle = 0.5235988
+angular_limit_x/lower_angle = -0.5235988
+angular_limit_y/upper_angle = 0.5235988
+angular_limit_y/lower_angle = -0.5235988
+angular_limit_z/upper_angle = 0.2617994
+angular_limit_z/lower_angle = -0.2617994
 script = ExtResource("3_kldcw")
 PhysicsSkeleton = NodePath("../../..")
-AnimationSkeleton = NodePath("../../..")
+AnimationSkeleton = NodePath("../../../../GeneralSkeleton_anim")
 BoneA = NodePath("..")
 BoneB = NodePath("../../LeftHand_rag")
 
-[node name="LeftHand_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=1653582476 node_paths=PackedStringArray("Skeleton")]
+[node name="LeftHand_rag" type="RigidBody3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll" unique_id=372761223 node_paths=PackedStringArray("PhysicsSkeleton")]
 transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, 0.5953282, 1.1014752, -0.032300256)
+mass = 2.0
 script = ExtResource("2_8hoec")
 BoneName = "LeftHand"
-Skeleton = NodePath("../..")
+PhysicsSkeleton = NodePath("../..")
 
-[node name="LeftHand_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftHand_rag" unique_id=279812135]
+[node name="LeftHand_col" type="CollisionShape3D" parent="baseRig/rig/GeneralSkeleton/Ragdoll/LeftHand_rag" unique_id=1886678306]
 shape = SubResource("CapsuleShape3D_lgu1l")
+
+[node name="GeneralSkeleton_anim" type="Skeleton3D" parent="baseRig/rig" unique_id=775059530]
+unique_name_in_owner = true
+motion_scale = 0.6853958
+bones/0/name = "Hips"
+bones/0/parent = -1
+bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6853958, 0.0030260459)
+bones/0/enabled = true
+bones/0/position = Vector3(0, 0.6853958, 0.0030260459)
+bones/0/rotation = Quaternion(0, 0, 0, 1)
+bones/0/scale = Vector3(1, 1, 1)
+bones/0/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/1/name = "LeftUpperLeg"
+bones/1/parent = 0
+bones/1/rest = Transform3D(-1, 0, 0, 0, -1, 0, 0, 0, 1, 0.08963954, 1.2635823e-08, -1.3924932e-09)
+bones/1/enabled = true
+bones/1/position = Vector3(0.08963954, 1.2635823e-08, -1.3924932e-09)
+bones/1/rotation = Quaternion(0, 0, 1, 0)
+bones/1/scale = Vector3(1, 1, 1)
+bones/1/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/2/name = "LeftLowerLeg"
+bones/2/parent = 1
+bones/2/rest = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -0.021760315, 0.29590946, 0.031041915)
+bones/2/enabled = true
+bones/2/position = Vector3(-0.021760315, 0.29590946, 0.031041915)
+bones/2/rotation = Quaternion(0, 1, 0, 0)
+bones/2/scale = Vector3(1, 1, 1)
+bones/2/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/3/name = "LeftFoot"
+bones/3/parent = 2
+bones/3/rest = Transform3D(-1, 0, 0, 0, 0, -1, 0, -1, 0, 0.012124662, 0.2947673, 0.0950257)
+bones/3/enabled = true
+bones/3/position = Vector3(0.012124662, 0.2947673, 0.0950257)
+bones/3/rotation = Quaternion(0, 0.70710677, -0.70710677, 0)
+bones/3/scale = Vector3(1, 1, 1)
+bones/3/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/4/name = "LeftToes"
+bones/4/parent = 3
+bones/4/rest = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -0.012956047, 0.11403753, -0.07134319)
+bones/4/enabled = true
+bones/4/position = Vector3(-0.012956047, 0.11403753, -0.07134319)
+bones/4/rotation = Quaternion(0, 1, 0, 0)
+bones/4/scale = Vector3(1, 1, 1)
+bones/4/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/5/name = "RightUpperLeg"
+bones/5/parent = 0
+bones/5/rest = Transform3D(-1, 0, 0, 0, -1, 0, 0, 0, 1, -0.08963954, 1.2630444e-08, -3.2596859e-09)
+bones/5/enabled = true
+bones/5/position = Vector3(-0.08963954, 1.2630444e-08, -3.2596859e-09)
+bones/5/rotation = Quaternion(0, 0, 1, 0)
+bones/5/scale = Vector3(1, 1, 1)
+bones/5/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/6/name = "RightLowerLeg"
+bones/6/parent = 5
+bones/6/rest = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0.021760283, 0.2959094, 0.031041918)
+bones/6/enabled = true
+bones/6/position = Vector3(0.021760283, 0.2959094, 0.031041918)
+bones/6/rotation = Quaternion(0, 1, 0, 0)
+bones/6/scale = Vector3(1, 1, 1)
+bones/6/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/7/name = "RightFoot"
+bones/7/parent = 6
+bones/7/rest = Transform3D(-1, 0, 0, 0, 0, -1, 0, -1, 0, -0.0121246865, 0.2947673, 0.095025726)
+bones/7/enabled = true
+bones/7/position = Vector3(-0.0121246865, 0.2947673, 0.095025726)
+bones/7/rotation = Quaternion(0, 0.70710677, -0.70710677, 0)
+bones/7/scale = Vector3(1, 1, 1)
+bones/7/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/8/name = "RightToes"
+bones/8/parent = 7
+bones/8/rest = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0.012956029, 0.11403748, -0.07134316)
+bones/8/enabled = true
+bones/8/position = Vector3(0.012956029, 0.11403748, -0.07134316)
+bones/8/rotation = Quaternion(0, 1, 0, 0)
+bones/8/scale = Vector3(1, 1, 1)
+bones/8/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/9/name = "Spine"
+bones/9/parent = 0
+bones/9/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5971226e-14, 0.24186416, -0.017136768)
+bones/9/enabled = true
+bones/9/position = Vector3(-3.5971226e-14, 0.24186416, -0.017136768)
+bones/9/rotation = Quaternion(0, 0, 0, 1)
+bones/9/scale = Vector3(1, 1, 1)
+bones/9/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/10/name = "Neck"
+bones/10/parent = 9
+bones/10/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.4798095e-14, 0.24480015, -0.04347497)
+bones/10/enabled = true
+bones/10/position = Vector3(-8.4798095e-14, 0.24480015, -0.04347497)
+bones/10/rotation = Quaternion(0, 0, 0, 1)
+bones/10/scale = Vector3(1, 1, 1)
+bones/10/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/11/name = "Head"
+bones/11/parent = 10
+bones/11/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7111363e-14, 0.08024377, 0.03129164)
+bones/11/enabled = true
+bones/11/position = Vector3(-3.7111363e-14, 0.08024377, 0.03129164)
+bones/11/rotation = Quaternion(0, 0, 0, 1)
+bones/11/scale = Vector3(1, 1, 1)
+bones/11/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/12/name = "c_head.x.001"
+bones/12/parent = 11
+bones/12/rest = Transform3D(1, -3.033867e-13, 2.3841814e-07, 1.651763e-13, 0.99999994, 2.9802322e-08, -2.3841898e-07, -2.980232e-08, 1, -8.049068e-14, 0.2653072, -7.90677e-09)
+bones/12/enabled = true
+bones/12/position = Vector3(-8.049068e-14, 0.2653072, -7.90677e-09)
+bones/12/rotation = Quaternion(-1.4901161e-08, 1.1920949e-07, 8.436451e-14, 1)
+bones/12/scale = Vector3(1, 0.99999994, 1)
+bones/12/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/13/name = "RightShoulder"
+bones/13/parent = 9
+bones/13/rest = Transform3D(0, -1, 0, 0, 0, 1, -1, 0, 0, -0.038310908, 0.18536027, -0.037099432)
+bones/13/enabled = true
+bones/13/position = Vector3(-0.038310908, 0.18536027, -0.037099432)
+bones/13/rotation = Quaternion(0.5, -0.5, -0.5, -0.5)
+bones/13/scale = Vector3(1, 1, 1)
+bones/13/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/14/name = "RightUpperArm"
+bones/14/parent = 13
+bones/14/rest = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -4.76517e-09, 0.11493269, -5.639298e-08)
+bones/14/enabled = true
+bones/14/position = Vector3(-4.76517e-09, 0.11493269, -5.639298e-08)
+bones/14/rotation = Quaternion(0, 1, 0, 0)
+bones/14/scale = Vector3(1, 1, 1)
+bones/14/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/15/name = "RightLowerArm"
+bones/15/parent = 14
+bones/15/rest = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -0.008607539, 0.22104234, 0.0055724275)
+bones/15/enabled = true
+bones/15/position = Vector3(-0.008607539, 0.22104234, 0.0055724275)
+bones/15/rotation = Quaternion(0, 0.70710677, 0, 0.70710677)
+bones/15/scale = Vector3(1, 1, 1)
+bones/15/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/16/name = "RightHand"
+bones/16/parent = 15
+bones/16/rest = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -0.0055724303, 0.22104232, 0.027517477)
+bones/16/enabled = true
+bones/16/position = Vector3(-0.0055724303, 0.22104232, 0.027517477)
+bones/16/rotation = Quaternion(0, -0.70710677, 0, 0.70710677)
+bones/16/scale = Vector3(1, 1, 1)
+bones/16/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/17/name = "c_hand_ik.r.001"
+bones/17/parent = 16
+bones/17/rest = Transform3D(-0.9956404, -4.1443855e-08, 0.09327366, -1.9499566e-08, 0.9999996, 7.450581e-09, -0.09327367, 0, -0.99564046, 0.032300208, 0.18574974, -0.011144884)
+bones/17/enabled = true
+bones/17/position = Vector3(0.032300208, 0.18574974, -0.011144884)
+bones/17/rotation = Quaternion(-9.82939e-09, 0.99890953, 1.475508e-09, 0.04668775)
+bones/17/scale = Vector3(0.9999999, 0.9999996, 0.99999994)
+bones/17/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/18/name = "LeftShoulder"
+bones/18/parent = 9
+bones/18/rest = Transform3D(0, 1, 0, 0, 0, 1, 1, 0, 0, 0.038310908, 0.18536027, -0.037099432)
+bones/18/enabled = true
+bones/18/position = Vector3(0.038310908, 0.18536027, -0.037099432)
+bones/18/rotation = Quaternion(0.5, 0.5, 0.5, -0.5)
+bones/18/scale = Vector3(1, 1, 1)
+bones/18/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/19/name = "LeftUpperArm"
+bones/19/parent = 18
+bones/19/rest = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -2.0981632e-09, 0.11493269, -4.9659022e-08)
+bones/19/enabled = true
+bones/19/position = Vector3(-2.0981632e-09, 0.11493269, -4.9659022e-08)
+bones/19/rotation = Quaternion(0, 1, 0, 0)
+bones/19/scale = Vector3(1, 1, 1)
+bones/19/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/20/name = "LeftLowerArm"
+bones/20/parent = 19
+bones/20/rest = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0.008607556, 0.22104235, 0.0055723866)
+bones/20/enabled = true
+bones/20/position = Vector3(0.008607556, 0.22104235, 0.0055723866)
+bones/20/rotation = Quaternion(0, -0.70710677, 0, 0.70710677)
+bones/20/scale = Vector3(1, 1, 1)
+bones/20/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/21/name = "LeftHand"
+bones/21/parent = 20
+bones/21/rest = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.0055725332, 0.22104229, 0.027517458)
+bones/21/enabled = true
+bones/21/position = Vector3(0.0055725332, 0.22104229, 0.027517458)
+bones/21/rotation = Quaternion(0, 0.70710677, 0, 0.70710677)
+bones/21/scale = Vector3(1, 1, 1)
+bones/21/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+bones/22/name = "c_hand_ik.l.001"
+bones/22/parent = 21
+bones/22/rest = Transform3D(-0.99564034, 1.0151416e-07, -0.09327365, 1.09226676e-07, 0.9999996, -3.7252903e-08, 0.093273625, -4.4703484e-08, -0.9956404, -0.032300197, 0.1857498, -0.011144889)
+bones/22/enabled = true
+bones/22/position = Vector3(-0.032300197, 0.1857498, -0.011144889)
+bones/22/rotation = Quaternion(5.373582e-08, 0.99890953, -2.0050676e-08, -0.04668773)
+bones/22/scale = Vector3(0.9999998, 0.9999996, 0.9999999)
+bones/22/bone_meta/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
+metadata/extras = {
+"const_interp": false,
+"exclude": false,
+"softlink": false
+}
